@@ -1,0 +1,7 @@
+The Problem: https://www.hackerrank.com/challenges/travel-around-the-world/problem
+Backhistory: I worked on this one earlier this summer before taking my algorithms class. Lets see if I can apply what I learnt to this.
+
+Started out with a very naive basic solution. 
+Timed out on basically everything. O(N^2) time.
+
+Looks to be a Dynamic Programming problem of sorts. 
