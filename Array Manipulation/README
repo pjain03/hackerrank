@@ -1,0 +1,30 @@
+The Problem: https://www.hackerrank.com/challenges/crush/problem
+
+I started out with the naive solution which gave me O(nm) time and timed out on most tests as expected. Then after about a day I started to wonder if I even needed to try to solve the problem for all n values after which I created an array to store the a-value and b-value along with the k-value in an array as so: [a/b, +/-k]. I sorted these by the a/b values in ascending order to simulate a "number line" since a <= b for all a, b pairs. So when I proceeded to step through this number line adding a k-value upon finding an a-value and adding a negative k-value upon finding a b-value (by construction), I failed to include b values in the sum. I got 48/60 and a complexity of O(mlogm).
+
+Then after a lot of thought I realized my mistake. I had had the right idea but I hadn't considered the entire question. After initially trying to hash in values into my original construct and overcomplicating it I realized there was a much simpler, MUCH more straightforward solution.
+
+I create an array val of size n + 1. At index a - 1, I add k, at index b I subtract k. This way, I include all values at all indices. That is, I add values and subtract values as many times as needed due to my staggering of the a and b values. 
+
+Earlier on the following input:
+5 3
+1 3 100
+3 5 100
+3 5 100
+
+I was doing, in effect, the following: (n + 1 values, I know this isn't exactly the way I had implemented my solution but this is just an explanation of how I think of the difference in effect of my solutions. Warning: might be unlear it is pretty late in India right now)
+
+0 100 0 -100 0 0 (since we add value at a, subtract it at b)
+0 100 0 0 0 - 100
+0 100 0 0 100 -200
+
+When going through this, the max I get is 200.
+
+Now, by staggering out my values I do the following:
+100 0 0 -100 0 0 (add values at a - 1, subtract at b. For ith a = jth b, their effects will be summed correctly)
+100 0 100 -100 0 -100
+100 0 200 0 0 -200
+
+When going through this, the max I get is 300 since I counted the correct values by staggering out my b values. 
+
+This got me full points, and O(n + m) time. 
