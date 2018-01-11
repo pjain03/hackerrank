@@ -35,3 +35,5 @@ for i in range(N):
         print(i)
         sum_valid_cities += 1
 print(sum_valid_cities)        
+
+# runtime: O(N) since we only visit at most N cities by backtracking and removing the validity of some as starts
