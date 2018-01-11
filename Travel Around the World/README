@@ -5,3 +5,8 @@ Started out with a very naive basic solution.
 Timed out on basically everything. O(N^2) time.
 
 Looks to be a Dynamic Programming problem of sorts. 
+
+I wonder if we even need to compare every city to every other...
+0. diff = a - b for all a, b pairs.
+1. Store all values in diff < 0 since those are the only ones which would cause potential problems.
+2. Pick every one for which diff < 0 and go backwards marking each as invalid? reducing our count of valid cities?
