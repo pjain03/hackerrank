@@ -25,7 +25,13 @@ for i in range(2*N - 1, N - 1, -1):
             k = i - 1
             # travel backwards, marking invalid cities till diff becomes valid ie >= 0
             while diff < 0 and k >= 0:
-                diff += a[k] - b[k]
+                # amount spent at next step shout not exceed our cap
+                diff -= b[k]
+                if diff < -1 * C:
+                    print(0)
+                    exit()
+                # amount we can refuel    
+                diff += a[k]    
                 if diff < 0:
                     valid_city[k % N] = False
                 k -= 1

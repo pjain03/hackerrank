@@ -15,10 +15,14 @@ Any invalid city reached already has been considered then...
 So in essence we only go through N cities for every city... but not all these combinations are unique. There are N^2 combinations but they can be encoded so:
 N + N cities. Start from 0th city, go through all N, end at 0. Start at 1, go through all, reach 0, go to 1. and so on...
 
-This idea has failed drastically. It's given me lower values than before.
+This idea has failed drastically. It's given me lower results than before.
 
 EUREKA! I WAS TRAVELLING FORWARDS IN THE CITIES AND UPON FINDING A SINK I WAS STILL MOVING FORWARDS SO THAT I WASN'T CORRECTING MY RESPONSE TO CITIES VISITED EARLIER BUT INSTEAD WAS CORRECTING THAT FOR CITIES I WAS ABOUT TO VISIT WHICH WAS ABSURD. 
 
 We can correct this by going backwards from 2*N -> N and upon noticing a sink (of course a sink was previously defined as a city for which diff < 0) we travel backwards for all such situations where diff !>= 0 despite the diff of that city (IE it isn't a valid start) and we mark that city as not a valid city to start from in valid_city.
 
 This submission gets 1 test case wrong. We have 109.09/120 points. 
+
+WE DID NOT ACCOUNT FOR THE FACT THAT MID-TRAVEL WE MIGHT EXCEED THE CAP. THAT IS AFTER HAVING SPEND OUR FUEL AT THE CURRENT STATION, WE TRAVEL TO THE NEXT ONE USING MORE FUEL, BUT THIS FUEL SHOULD NOT EXCEED OUR CAP SINCE WE CAN'T FIT THAT INTO OUR GAS TANK.
+
+This submission gets nothing wrong, 120/120 points, and we ARE DONE!!!!! #MICDROP
