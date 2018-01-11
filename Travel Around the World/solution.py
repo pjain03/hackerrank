@@ -12,28 +12,29 @@ for i in range(N):
 # so that starting at any point in this (in first N), we take N steps and reach the start again
 a = a + a
 b = b + b
-for i in range(N):
-    if valid_city:
+# we must go backwards so that we don't change how cities that we will reach in the future will react to conditions in the
+# current city, sink or not.
+for i in range(2*N - 1, N - 1, -1):
+    if valid_city[i % N]:
         # you can travel from this city to next if a[i] > b[i]
         diff = a[i] - b[i]
         # if not ie a[i] < b[i] meaning it costs more to travel than we have
         if diff < 0:
-            valid_city[i] = False
-            # max value this can take is 2N by design, so we only need to be cautious of staying in bounds of valid_city
-            k = i + 1
-            change = 0
-            while diff < 0 and change < N:
+            valid_city[i % N] = False
+            # min value this can take is N - 1 by design
+            k = i - 1
+            # travel backwards, marking invalid cities till diff becomes valid ie >= 0
+            while diff < 0 and k >= 0:
                 diff += a[k] - b[k]
                 if diff < 0:
                     valid_city[k % N] = False
-                change += 1
-                k += 1
+                k -= 1
 
 sum_valid_cities = 0
 for i in range(N):
     if valid_city[i]:
-        print(i)
         sum_valid_cities += 1
 print(sum_valid_cities)        
 
-# runtime: O(N) since we only visit at most N cities by backtracking and removing the validity of some as starts
+# runtime = O(n) since we keep track of valid and invalid cities by valid_city and the outer and inner loop only make at
+# at max 2N iterations (summed)

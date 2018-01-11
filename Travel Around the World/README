@@ -8,7 +8,7 @@ Looks to be a Dynamic Programming problem of sorts.
 
 I wonder if we even need to compare every city to every other...
 0. diff = a - b for all a, b pairs.
-1. Store all values in diff < 0 since those are the only ones which would cause potential problems.
+1. Store all values in diff < 0 since those are the only ones which would cause potential problems. (sinks)
 2. Pick every one for which diff < 0 and go backwards marking each as invalid? reducing our count of valid cities?
 
 Any invalid city reached already has been considered then...
@@ -16,3 +16,9 @@ So in essence we only go through N cities for every city... but not all these co
 N + N cities. Start from 0th city, go through all N, end at 0. Start at 1, go through all, reach 0, go to 1. and so on...
 
 This idea has failed drastically. It's given me lower values than before.
+
+EUREKA! I WAS TRAVELLING FORWARDS IN THE CITIES AND UPON FINDING A SINK I WAS STILL MOVING FORWARDS SO THAT I WASN'T CORRECTING MY RESPONSE TO CITIES VISITED EARLIER BUT INSTEAD WAS CORRECTING THAT FOR CITIES I WAS ABOUT TO VISIT WHICH WAS ABSURD. 
+
+We can correct this by going backwards from 2*N -> N and upon noticing a sink (of course a sink was previously defined as a city for which diff < 0) we travel backwards for all such situations where diff !>= 0 despite the diff of that city (IE it isn't a valid start) and we mark that city as not a valid city to start from in valid_city.
+
+This submission gets 1 test case wrong. We have 109.09/120 points. 
